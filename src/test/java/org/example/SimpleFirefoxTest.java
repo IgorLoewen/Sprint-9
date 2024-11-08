@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import static org.junit.Assert.assertEquals;
 
 public class SimpleFirefoxTest {
@@ -13,15 +12,15 @@ public class SimpleFirefoxTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver"); // Убедитесь, что путь к geckodriver верный
+        System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver"); // Проверь, что путь верный
         driver = new FirefoxDriver();
     }
 
     @Test
-    public void openPageAndCheckTitle() {
-        driver.get("https://www.example.com");
-        String title = driver.getTitle();
-        assertEquals("Example Domain", title);
+    public void openAndCheckTitleTest() {
+        driver.get("https://example.com"); // Используем страницу, которая точно откроется
+        String pageTitle = driver.getTitle(); // Получаем заголовок страницы
+        assertEquals("Example Domain", pageTitle); // Проверяем, что заголовок совпадает с ожидаемым
     }
 
     @After
