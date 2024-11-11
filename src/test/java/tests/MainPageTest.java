@@ -14,19 +14,24 @@ public class MainPageTest {
 
     @Before
     public void setUp() {
+        // Инициализация WebDriver и переход на страницу
         driver = new FirefoxDriver();
         driver.get("https://qa-scooter.praktikum-services.ru/");
-        mainPage = new MainPage(driver); // Создаём объект MainPage для использования локаторов и методов
+        mainPage = new MainPage(driver);
     }
 
     @Test
-    public void testSomeButton() {
-        mainPage.clickSomeButton(); // Используем метод из MainPage для нажатия на кнопку
-        // Здесь можно добавить утверждения, чтобы проверить результат
+    public void testClickAllQuestionButtons() {
+        // Цикл для нажатия на все 8 кнопок
+        for (int i = 0; i < 8; i++) {
+            mainPage.clickQuestionButton(i); // Нажимаем на каждую кнопку
+            // Здесь можно добавить проверки для каждого вопроса, если требуется
+        }
     }
 
     @After
     public void tearDown() {
-        driver.quit(); // Завершаем сессию после выполнения теста
+        // Закрываем браузер после выполнения тестов
+        driver.quit();
     }
 }
