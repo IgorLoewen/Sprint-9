@@ -1,43 +1,24 @@
 // MainPageTest.java в пакете tests
 package tests;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import pages.MainPage;
-import utils.BrowserChoose;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
-
 import static org.junit.Assert.assertEquals;
 
-public class MainPageTest {
-    private WebDriver driver;
+public class MainPageTest extends TestsSetUp { // Наследуем TestsSetUp для использования общих настроек
     private MainPage mainPage;
-
-    @Before
-    public void setUp() {
-        String browser = System.getProperty("browser", "chrome");
-        // Получаем параметр браузера из системных переменных
-        // "mvn test -Dbrowser=firefox" - команда для запуска firefox через терминал!
-        // или же можно поменять название браузера прям тут для старта!
-        // Синтаксис: System.getProperty(String key, String defaultValue)!
-
-        // Инициализируем драйвер через BrowserChoose
-        driver = BrowserChoose.createDriver(browser);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-
-        mainPage = new MainPage(driver);
-    }
 
     @Test
     public void testClickAllQuestionButtons() {
-        // Массив ожидаемых текстов для каждого вопроса
+        mainPage = new MainPage(driver);
+
+        // Ожидаемые тексты для каждого вопроса
         String[] expectedTexts = {
-                "Сутки — 400 рублей. Оплата курьеру — наличными или картой.", // Замените на фактический текст
+                "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
                 "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.",
                 "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.",
                 "Только начиная с завтрашнего дня. Но скоро станем расторопнее.",
@@ -47,7 +28,6 @@ public class MainPageTest {
                 "Да, обязательно. Всем самокатов! И Москве, и Московской области."
         };
 
-        // Цикл для нажатия на все 8 кнопок и проверки текста
         for (int b = 0; b < 8; b++) {
             mainPage.clickQuestionButton(b); // Нажимаем на кнопку
 
@@ -61,13 +41,6 @@ public class MainPageTest {
             // Получаем текст ответа и сравниваем с ожидаемым
             String actualText = driver.findElement(answerTextLocator).getText();
             assertEquals("Текст для вопроса " + (b + 1) + " не совпадает", expectedTexts[b], actualText);
-        }
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
         }
     }
 }
