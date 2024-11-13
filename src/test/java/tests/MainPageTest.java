@@ -1,15 +1,17 @@
+
 // MainPageTest.java в пакете tests
 package tests;
 
 import org.junit.Test;
 import pages.MainPage;
-import org.openqa.selenium.By;
+import static org.junit.Assert.assertEquals;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.time.Duration;
-import static org.junit.Assert.assertEquals;
 
-public class MainPageTest extends TestsSetUp { // Наследуем TestsSetUp для использования общих настроек
+import java.time.Duration;
+
+
+public class MainPageTest extends TestsSetUp {
     private MainPage mainPage;
 
     @Test
@@ -28,19 +30,46 @@ public class MainPageTest extends TestsSetUp { // Наследуем TestsSetUp 
                 "Да, обязательно. Всем самокатов! И Москве, и Московской области."
         };
 
-        for (int b = 0; b < 8; b++) {
-            mainPage.clickQuestionButton(b); // Нажимаем на кнопку
-
-            // Локатор для текста, который появляется после раскрытия
-            By answerTextLocator = By.id("accordion__panel-" + b);
-
-            // Явное ожидание для отображения текста
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(answerTextLocator));
-
-            // Получаем текст ответа и сравниваем с ожидаемым
-            String actualText = driver.findElement(answerTextLocator).getText();
-            assertEquals("Текст для вопроса " + (b + 1) + " не совпадает", expectedTexts[b], actualText);
+        for (int i = 0; i < 8; i++) {
+            mainPage.clickQuestionButton(i); // Нажимаем на кнопку
+            String actualText = mainPage.getAnswerText(i); // Получаем текст ответа
+            assertEquals("Текст для вопроса " + (i + 1) + " не совпадает", expectedTexts[i], actualText);
         }
     }
+
+    @Test
+    public void testClickUpperOrderButton() {
+        System.out.println("Запускается тест: testClickUpperOrderButton");
+        mainPage = new MainPage(driver);
+
+        // Нажимаем на верхнюю кнопку "Заказать"
+        mainPage.clickUpperOrderButton();
+
+        // Проверяем, что URL изменился на ожидаемый
+        String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlToBe(expectedUrl));
+
+        String actualUrl = driver.getCurrentUrl();
+        assertEquals("URL не совпадает с ожидаемым", expectedUrl, actualUrl);
+    }
+
+
+    @Test
+    public void testClickLowerOrderButton() {
+        System.out.println("Запускается тест: testClickLowerOrderButton");
+        mainPage = new MainPage(driver);
+
+        // Нажимаем на нижнюю кнопку "Заказать"
+        mainPage.clickLowerOrderButton();
+
+        // Проверяем, что URL изменился на ожидаемый
+        String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlToBe(expectedUrl));
+
+        String actualUrl = driver.getCurrentUrl();
+        assertEquals("URL не совпадает с ожидаемым", expectedUrl, actualUrl);
+    }
+
 }

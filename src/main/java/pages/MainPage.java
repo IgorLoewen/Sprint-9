@@ -43,29 +43,58 @@ public class MainPage {
     private By outsideMKADDeliveryButton = By.id("accordion__heading-7");
     // Кнопка "Я живу за МКАДом, привезёте?" - Локатор: ID элемента "accordion__heading-7"
 
+    // Локаторы для кнопок "Заказать"
+    private By upperOrderButton = By.xpath("(//button[contains(@class, 'Button_Button__ra12g')])[1]");
+    // Верхняя кнопка "Заказать" - Локатор: XPath первого элемента с классом "Button_Button__ra12g"
+
+    private By lowerOrderButton = By.xpath("//*[@id='root']/div/div/div[4]/div[2]/div[5]/button");
+    // Нижняя кнопка "Заказать" - Локатор: XPath элемента с точным адресом
+
+
     // Метод для прокрутки к элементу
     public void scrollToElement(By locator) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(locator));
     }
 
-    // Универсальный метод для нажатия на любую кнопку по её номеру (от 0 до 7)
-    public void clickQuestionButton(int buttonNumber) {
-        By questionButton = By.id("accordion__heading-" + buttonNumber);
-
+    // Универсальный метод для клика по кнопке
+    public void clickButton(By locator) {
         // Прокрутка к элементу перед кликом
-        scrollToElement(questionButton);
+        scrollToElement(locator);
 
-        // Явное ожидание, пока элемент не станет видимым и кликабельным
+        // Ожидание кликабельности кнопки
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(questionButton));
-        wait.until(ExpectedConditions.elementToBeClickable(questionButton));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
 
-        // Клик по элементу
-        driver.findElement(questionButton).click();
-
-
+        // Клик по кнопке
+        driver.findElement(locator).click();
     }
 
+    // Метод для клика по кнопкам вопросов в цикле
+    public void clickQuestionButton(int buttonNumber) {
+        By questionButton = By.id("accordion__heading-" + buttonNumber);
+        clickButton(questionButton);
+    }
 
+    // Метод для клика по верхней кнопке "Заказать"
+    public void clickUpperOrderButton() {
+        clickButton(upperOrderButton);
+    }
+
+    // Метод для клика по нижней кнопке "Заказать"
+    public void clickLowerOrderButton() {
+        clickButton(lowerOrderButton);
+    }
+
+    // Метод для получения текста ответа на вопрос
+    public String getAnswerText(int questionNumber) {
+        By answerLocator = By.id("accordion__panel-" + questionNumber);
+
+        // Ожидание видимости текста
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(answerLocator));
+
+        // Возвращаем текст ответа
+        return driver.findElement(answerLocator).getText();
+    }
 }
