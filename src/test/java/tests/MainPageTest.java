@@ -16,7 +16,7 @@ public class MainPageTest extends TestsSetUp {
 
     @Test
     public void testClickAllQuestionButtons() {
-        mainPage = new MainPage(driver);
+
 
         // Ожидаемые тексты для каждого вопроса
         String[] expectedTexts = {
@@ -30,6 +30,7 @@ public class MainPageTest extends TestsSetUp {
                 "Да, обязательно. Всем самокатов! И Москве, и Московской области."
         };
 
+        mainPage = new MainPage(driver);
         for (int i = 0; i < 8; i++) {
             mainPage.clickQuestionButton(i); // Нажимаем на кнопку
             String actualText = mainPage.getAnswerText(i); // Получаем текст ответа
@@ -39,15 +40,14 @@ public class MainPageTest extends TestsSetUp {
 
     @Test
     public void testClickUpperOrderButton() {
-        System.out.println("Запускается тест: testClickUpperOrderButton");
-        mainPage = new MainPage(driver);
 
+
+        mainPage = new MainPage(driver);
         // Нажимаем на верхнюю кнопку "Заказать"
         mainPage.clickUpperOrderButton();
 
         // Проверяем, что URL изменился на ожидаемый
         String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe(expectedUrl));
 
         String actualUrl = driver.getCurrentUrl();
@@ -57,15 +57,13 @@ public class MainPageTest extends TestsSetUp {
 
     @Test
     public void testClickLowerOrderButton() {
-        System.out.println("Запускается тест: testClickLowerOrderButton");
-        mainPage = new MainPage(driver);
 
+        mainPage = new MainPage(driver);
         // Нажимаем на нижнюю кнопку "Заказать"
         mainPage.clickLowerOrderButton();
 
         // Проверяем, что URL изменился на ожидаемый
         String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe(expectedUrl));
 
         String actualUrl = driver.getCurrentUrl();

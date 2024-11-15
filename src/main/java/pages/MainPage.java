@@ -17,32 +17,6 @@ public class MainPage {
         this.driver = driver;
     }
 
-    // Локаторы для кнопок вопросов в разделе "Вопросы о важном"
-
-    private By priceAndPaymentButton = By.id("accordion__heading-0");
-    // Кнопка "Сколько это стоит? И как оплатить?" - Локатор: ID элемента "accordion__heading-0"
-
-    private By multipleScootersButton = By.id("accordion__heading-1");
-    // Кнопка "Хочу сразу несколько самокатов! Так можно?" - Локатор: ID элемента "accordion__heading-1"
-
-    private By rentalTimeButton = By.id("accordion__heading-2");
-    // Кнопка "Как рассчитывается время аренды?" - Локатор: ID элемента "accordion__heading-2"
-
-    private By orderForTodayButton = By.id("accordion__heading-3");
-    // Кнопка "Можно ли заказать самокат прямо на сегодня?" - Локатор: ID элемента "accordion__heading-3"
-
-    private By extendOrReturnButton = By.id("accordion__heading-4");
-    // Кнопка "Можно ли продлить заказ или вернуть самокат раньше?" - Локатор: ID элемента "accordion__heading-4"
-
-    private By chargerIncludedButton = By.id("accordion__heading-5");
-    // Кнопка "Вы привозите зарядку вместе с самокатом?" - Локатор: ID элемента "accordion__heading-5"
-
-    private By cancelOrderButton = By.id("accordion__heading-6");
-    // Кнопка "Можно ли отменить заказ?" - Локатор: ID элемента "accordion__heading-6"
-
-    private By outsideMKADDeliveryButton = By.id("accordion__heading-7");
-    // Кнопка "Я живу за МКАДом, привезёте?" - Локатор: ID элемента "accordion__heading-7"
-
     // Локаторы для кнопок "Заказать"
     private By upperOrderButton = By.xpath("(//button[contains(@class, 'Button_Button__ra12g')])[1]");
     // Верхняя кнопка "Заказать" - Локатор: XPath первого элемента с классом "Button_Button__ra12g"
