@@ -1,10 +1,12 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 public class OrderPage {
@@ -39,36 +41,52 @@ public class OrderPage {
         driver.findElement(phoneField).sendKeys(phone);
     }
 
-    // Локатор для поля ввода станции
+    // Локатор для поля ввода станции метро
     public By stationField = By.cssSelector("input[placeholder='* Станция метро']");
 
     // Метод для выбора станции
     public void selectStation(String station) {
-        // Нажимаем на поле ввода станции
         WebElement stationInput = driver.findElement(stationField);
         stationInput.click();
-
-        // Вводим название станции
         stationInput.sendKeys(station);
+        stationInput.sendKeys(Keys.ARROW_DOWN);
+        stationInput.sendKeys(Keys.ENTER);
 
-        // Ждём появления выпадающего списка с нужной станцией
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        By stationOption = By.xpath("//div[contains(@class, 'select-search__row') and text()='" + station + "']");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(stationOption));
-
-        // Кликаем по станции
-        driver.findElement(stationOption).click();
-
-        // Проверяем, что поле ввода содержит выбранную станцию
         wait.until(ExpectedConditions.attributeToBe(stationField, "value", station));
     }
 
     // Локатор и метод для нажатия кнопки "Далее"
     public By nextButton = By.xpath("//*[@id='root']/div/div[2]/div[3]/button");
     public void clickNextButton() {
-        // Нажимаем на кнопку "Далее"
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
-        wait.until(ExpectedConditions.elementToBeClickable(nextButton));
         driver.findElement(nextButton).click();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    // Универсальный метод для проверки кнопки
+    public void checkElementPresence(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            // Ожидание видимости элемента
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            System.out.println("Всё пашет как надо!");
+        } catch (Exception e) {
+            System.err.println("Ошибка: Элемент не найден!");
+        }
+    }
+
+    // Метод для вызова проверки кнопки
+    public void verifyElementPresence() {
+        checkElementPresence(By.xpath("/html/body/div/div/div[2]/div[2]/div[1]/div[1]/div/input"));
     }
 }

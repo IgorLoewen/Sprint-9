@@ -1,6 +1,7 @@
 package tests;
 
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
 import pages.OrderPage;
@@ -37,11 +38,6 @@ public class OrderPageTest extends TestsSetUp {
 
 
 
-
-
-
-
-
-
+        orderPage.verifyElementPresence();
     }
 }
