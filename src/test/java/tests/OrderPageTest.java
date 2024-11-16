@@ -28,7 +28,7 @@ public class OrderPageTest extends TestsSetUp {
 
 
         // Делаем ввод в поле имя после явного появления элемента
-        wait.until(ExpectedConditions.visibilityOfElementLocated(orderPage.phoneField));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(orderPage.phoneField));
         orderPage.enterName("Игорь");
         orderPage.enterSurname("Лёвэн");
         orderPage.enterAddress("вапыпыавыаыва");
@@ -38,9 +38,10 @@ public class OrderPageTest extends TestsSetUp {
 
         orderPage.enterCalendarDate("5");
         orderPage.selectRentalTermFourDays();
+        orderPage.clickOrderButton();
+
+       // orderPage.clickConfirmOrderButton();
 
 
-
-        orderPage.verifyElementPresence();
     }
 }

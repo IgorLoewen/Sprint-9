@@ -78,40 +78,24 @@ public class OrderPage {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Универсальный метод для проверки кнопки
-    public void checkElementPresence(By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        try {
-            // Ожидание видимости элемента
-            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-            System.out.println("Всё пашет как надо!");
-        } catch (Exception e) {
-            System.err.println("Ошибка: Элемент не найден!");
-        }
+    // Локатор и метод нажатия на кнопку "Заказать"
+    private By orderButton = By.xpath("//button[contains(@class, 'Button_Button__ra12g') and contains(text(), 'Заказать')]");
+    public void clickOrderButton() {
+        driver.findElement(orderButton).click();
     }
 
-    // Метод для вызова проверки кнопки
-    public void verifyElementPresence() {
-        checkElementPresence(By.cssSelector("div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"));
-    }
+
+   /*  //Локатор и Кнопка "Да" для подтверждения оформления заказа
+    private By confirmOrderButton = By.xpath("//button[contains(@class, 'Button_Button__ra12g') and contains(text(), 'Да')]");
+    public void clickConfirmOrderButton() {
+        driver.findElement(confirmOrderButton).click();
+    }*/
+
+
+
+
+
+
+
+
 }
