@@ -36,6 +36,9 @@ public class OrderPageTest extends TestsSetUp {
         orderPage.selectStation("Сокольники");
         orderPage.clickNextButton();
 
+        orderPage.enterCalendarDate("5");
+        orderPage.selectRentalTermFourDays();
+
 
 
         orderPage.verifyElementPresence();

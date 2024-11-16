@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -62,6 +59,34 @@ public class OrderPage {
         driver.findElement(nextButton).click();
     }
 
+    // Локатор и метод для ввода числа в календаре
+    public By calendarDateField = By.cssSelector("div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div > input");
+    public void enterCalendarDate(String date) {
+        driver.findElement(calendarDateField).click(); // Нажимаем на поле
+        driver.findElement(calendarDateField).sendKeys(date); // Вводим цифру в поле
+    }
+
+    // Локаторы и метод для выбора длины аренды
+    public By dropdownField = By.cssSelector("div.Dropdown-root");
+    public By dropdownOpen = By.cssSelector("div.Dropdown-root.is-open");
+    public By rentalOptionFourDays = By.xpath("//div[contains(@class, 'Dropdown-option') and text()='четверо суток']");
+    public void selectRentalTermFourDays() {
+        try {driver.findElement(dropdownField).click();} catch (Exception e) {e.printStackTrace();return;}
+        try {WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.presenceOfElementLocated(dropdownOpen));} catch (Exception e) {e.printStackTrace();return;}
+        try {driver.findElement(rentalOptionFourDays).click();} catch (Exception e) {e.printStackTrace();}
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -87,6 +112,6 @@ public class OrderPage {
 
     // Метод для вызова проверки кнопки
     public void verifyElementPresence() {
-        checkElementPresence(By.xpath("/html/body/div/div/div[2]/div[2]/div[1]/div[1]/div/input"));
+        checkElementPresence(By.cssSelector("div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"));
     }
 }
