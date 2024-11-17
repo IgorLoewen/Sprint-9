@@ -61,7 +61,6 @@ public class OrderPage {
 
     // Локатор и метод для ввода числа в календаре с нажатием Enter
     public By calendarDateField = By.cssSelector("div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div > input");
-
     public void enterCalendarDate(String date) {
         WebElement calendarField = driver.findElement(calendarDateField); // Находим поле календаря
         calendarField.click(); // Нажимаем на поле
@@ -79,31 +78,49 @@ public class OrderPage {
     // Метод для выбора "трое суток" в сроке аренды
     public void selectRentalTermThreeDays() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
         // Кликаем на поле "Срок аренды"
         WebElement rentalField = wait.until(ExpectedConditions.elementToBeClickable(rentalTermField));
         rentalField.click();
-        System.out.println("Кликнули на поле 'Срок аренды'.");
-
         // Ждём, пока выпадающий список станет видимым
         WebElement optionThreeDays = wait.until(ExpectedConditions.visibilityOfElementLocated(rentalOptionThreeDays));
         optionThreeDays.click();
-        System.out.println("Выбрали опцию 'трое суток'.");
+    }
+    // Кнопка "Заказать" для подтверждения оформления заказа
+    private By placeOrderButton = By.xpath("/html/body/div/div/div[2]/div[3]/button[2]");
 
-        // Проверяем, что в поле появился текст "трое суток"
-        String selectedText = rentalField.getText();
-        if (selectedText.equals("трое суток")) {
-            System.out.println("Опция 'трое суток' успешно выбрана.");
-        } else {
-            System.out.println("Ошибка: выбрана другая опция или текст не появился.");
-        }
+    // Метод для нажатия на кнопку "Заказать"
+    public void clickPlaceOrderButton() {
+        // Ожидание, пока кнопка не станет кликабельной
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(placeOrderButton));
+
+        // Клик по кнопке
+        driver.findElement(placeOrderButton).click();
     }
 
 
+    // Локатор для кнопки "Да"
+    private By confirmOrderButton = By.xpath("//button[text()='Да']");
 
+    // Метод для нажатия на кнопку "Да"
+    public void clickConfirmOrderButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            // Ожидание видимости кнопки
+            wait.until(ExpectedConditions.visibilityOfElementLocated(confirmOrderButton));
+            // Ожидание кликабельности кнопки
+            wait.until(ExpectedConditions.elementToBeClickable(confirmOrderButton));
+            // Клик по кнопке
+            driver.findElement(confirmOrderButton).click();
+            System.out.println("Кнопка 'Да' успешно нажата.");
+        } catch (Exception e) {
+            System.err.println("Ошибка: Кнопка 'Да' не найдена или не кликабельна!");
+            e.printStackTrace();
+        }
+    }
 
-
-
+    // Локатор заголовка окна подтверждения заказа
+    private By orderConfirmationHeader = By.xpath("//div[contains(@class, 'Order_ModalHeader') and text()='Заказ оформлен']");
 
 
 

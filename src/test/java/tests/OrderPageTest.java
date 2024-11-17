@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
 import pages.OrderPage;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
@@ -38,10 +40,10 @@ public class OrderPageTest extends TestsSetUp {
 
         orderPage.enterCalendarDate("5");
         orderPage.selectRentalTermThreeDays();
-       // orderPage.clickOrderButton();
+        orderPage.clickPlaceOrderButton();
 
-       // orderPage.clickConfirmOrderButton();
-
-
+        orderPage.clickConfirmOrderButton();
     }
+
+
 }
