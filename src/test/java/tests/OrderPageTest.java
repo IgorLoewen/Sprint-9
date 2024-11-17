@@ -9,7 +9,7 @@ public class OrderPageTest extends TestsSetUp {
 
     private OrderFlow orderFlow;
 
-    @Test
+    @Test//Задание 2. Часть первая ... Нажать кнопку «Заказать». На странице две кнопки заказа.
     public void testClickOrderButton() {
         // Тест проверки кнопок "Заказать"
         orderFlow = new OrderFlow(driver);
@@ -17,7 +17,7 @@ public class OrderPageTest extends TestsSetUp {
         System.out.println("Тест кнопки 'Заказать' завершён.");
     }
 
-    @Test
+    @Test//Задание 2. Часть вторая ... Заполнить форму заказа.
     public void testFillOrderForm(){
         // Тест заполнения формы заказа
         orderFlow = new OrderFlow(driver);
@@ -30,7 +30,7 @@ public class OrderPageTest extends TestsSetUp {
         System.out.println("Тест заполнения формы заказа завершён.");
     }
 
-    @Test
+    @Test//Задание 2. Часть третяя ... Проверить, что появилось всплывающее окно с сообщением об успешном создании заказа.
     public void testOrderConfirmation() {
         // Тест проверки полного флоу с подтверждением
         orderFlow = new OrderFlow(driver);
@@ -46,36 +46,4 @@ public class OrderPageTest extends TestsSetUp {
         assertTrue("Всплывающее окно не появилось!", isVisible);
         System.out.println("Тест всплывающего окна завершён.");
     }
-
-   /* @Test
-    public void testClickUpperOrderButton() {
-        orderPage = new OrderPage(driver);
-        mainPage = new MainPage(driver);
-
-        // Нажимаем на верхнюю кнопку "Заказать"
-        mainPage.clickUpperOrderButton();
-        // Нажимаем на нижнюю кнопку "Заказать" - можно подключать через удаление
-        //перед строкой вызова следующего метода, но тогда метод выше надо отключить.
-        // только одна их кнопок за флоу должна работать!
-        // mainPage.clickLowerOrderButton();
-
-
-        // Делаем ввод в поле имя после явного появления элемента
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(orderPage.phoneField));
-        orderPage.enterName("Игорь");
-        orderPage.enterSurname("Лёвэн");
-        orderPage.enterAddress("вапыпыавыаыва");
-        orderPage.enterPhone("245624563546");
-        orderPage.selectStation("Сокольники");
-        orderPage.clickNextButton();
-
-        orderPage.enterCalendarDate("5");
-        orderPage.selectRentalTermThreeDays();
-        orderPage.clickPlaceOrderButton();
-
-        orderPage.clickConfirmOrderButton();
-
-        orderPage.isOrderConfirmationHeaderVisible();
-
-    } */
 }

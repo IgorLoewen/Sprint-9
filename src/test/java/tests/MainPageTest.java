@@ -5,16 +5,11 @@ package tests;
 import org.junit.Test;
 import pages.MainPage;
 import static org.junit.Assert.assertEquals;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.time.Duration;
-
 
 public class MainPageTest extends TestsSetUp {
     private MainPage mainPage;
 
-    @Test
+    @Test// Задание 1 ... Выпадающий список в разделе «Вопросы о важном». Тебе нужно проверить: когда нажимаешь на стрелочку, открывается соответствующий текст.
     public void testClickAllQuestionButtons() {
 
 
@@ -37,37 +32,4 @@ public class MainPageTest extends TestsSetUp {
             assertEquals("Текст для вопроса " + (i + 1) + " не совпадает", expectedTexts[i], actualText);
         }
     }
-
-    @Test
-    public void testClickUpperOrderButton() {
-
-
-        mainPage = new MainPage(driver);
-        // Нажимаем на верхнюю кнопку "Заказать"
-        mainPage.clickUpperOrderButton();
-
-        // Проверяем, что URL изменился на ожидаемый
-        String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
-        wait.until(ExpectedConditions.urlToBe(expectedUrl));
-
-        String actualUrl = driver.getCurrentUrl();
-        assertEquals("URL не совпадает с ожидаемым", expectedUrl, actualUrl);
-    }
-
-
-    @Test
-    public void testClickLowerOrderButton() {
-
-        mainPage = new MainPage(driver);
-        // Нажимаем на нижнюю кнопку "Заказать"
-        mainPage.clickLowerOrderButton();
-
-        // Проверяем, что URL изменился на ожидаемый
-        String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
-        wait.until(ExpectedConditions.urlToBe(expectedUrl));
-
-        String actualUrl = driver.getCurrentUrl();
-        assertEquals("URL не совпадает с ожидаемым", expectedUrl, actualUrl);
-    }
-
 }
