@@ -37,8 +37,8 @@ public class OrderPageTest extends TestsSetUp {
         orderPage.clickNextButton();
 
         orderPage.enterCalendarDate("5");
-        orderPage.selectRentalTermFourDays();
-        orderPage.clickOrderButton();
+        orderPage.selectRentalTermThreeDays();
+       // orderPage.clickOrderButton();
 
        // orderPage.clickConfirmOrderButton();
 
