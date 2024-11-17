@@ -78,10 +78,8 @@ public class OrderPage {
     // Метод для выбора "трое суток" в сроке аренды
     public void selectRentalTermThreeDays() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        // Кликаем на поле "Срок аренды"
         WebElement rentalField = wait.until(ExpectedConditions.elementToBeClickable(rentalTermField));
         rentalField.click();
-        // Ждём, пока выпадающий список станет видимым
         WebElement optionThreeDays = wait.until(ExpectedConditions.visibilityOfElementLocated(rentalOptionThreeDays));
         optionThreeDays.click();
     }
@@ -93,34 +91,34 @@ public class OrderPage {
         // Ожидание, пока кнопка не станет кликабельной
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(placeOrderButton));
-
-        // Клик по кнопке
         driver.findElement(placeOrderButton).click();
     }
 
 
     // Локатор для кнопки "Да"
     private By confirmOrderButton = By.xpath("//button[text()='Да']");
-
-    // Метод для нажатия на кнопку "Да"
     public void clickConfirmOrderButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        try {
-            // Ожидание видимости кнопки
             wait.until(ExpectedConditions.visibilityOfElementLocated(confirmOrderButton));
-            // Ожидание кликабельности кнопки
             wait.until(ExpectedConditions.elementToBeClickable(confirmOrderButton));
-            // Клик по кнопке
             driver.findElement(confirmOrderButton).click();
-            System.out.println("Кнопка 'Да' успешно нажата.");
-        } catch (Exception e) {
-            System.err.println("Ошибка: Кнопка 'Да' не найдена или не кликабельна!");
-            e.printStackTrace();
-        }
     }
 
     // Локатор заголовка окна подтверждения заказа
     private By orderConfirmationHeader = By.xpath("//div[contains(@class, 'Order_ModalHeader') and text()='Заказ оформлен']");
+
+    // Метод проверки появления заголовка
+    public boolean isOrderConfirmationHeaderVisible() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Явное ожидание
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(orderConfirmationHeader)); // Ожидаем видимость элемента
+            System.out.println("Заголовок 'Заказ оформлен' появился.");
+            return true; // Элемент найден
+        } catch (TimeoutException e) {
+            System.out.println("Заголовок 'Заказ оформлен' не появился.");
+            return false; // Элемент не найден
+        }
+    }
 
 
 

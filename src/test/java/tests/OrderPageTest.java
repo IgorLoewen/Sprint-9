@@ -23,10 +23,10 @@ public class OrderPageTest extends TestsSetUp {
 
         // Нажимаем на верхнюю кнопку "Заказать"
         mainPage.clickUpperOrderButton();
-                  // Нажимаем на нижнюю кнопку "Заказать" - можно подключать через удаление
-         //перед строкой вызова следующего метода, но тогда метод выше надо отключить.
-                   // только одна их кнопок за флоу должна работать!
-        //mainPage.clickLowerOrderButton();
+        // Нажимаем на нижнюю кнопку "Заказать" - можно подключать через удаление
+        //перед строкой вызова следующего метода, но тогда метод выше надо отключить.
+        // только одна их кнопок за флоу должна работать!
+        // mainPage.clickLowerOrderButton();
 
 
         // Делаем ввод в поле имя после явного появления элемента
@@ -43,7 +43,8 @@ public class OrderPageTest extends TestsSetUp {
         orderPage.clickPlaceOrderButton();
 
         orderPage.clickConfirmOrderButton();
+
+        orderPage.isOrderConfirmationHeaderVisible();
+
     }
-
-
 }
