@@ -71,7 +71,6 @@ public class OrderPage {
 
 
     // Локаторы и метод для выбора длины аренды
-    // Объявляем локаторы
     public By rentalTermField = By.xpath("//div[@class='Dropdown-placeholder' and contains(text(), 'Срок аренды')]");
     public By rentalOptionThreeDays = By.xpath("//div[text()='трое суток']");
 
@@ -119,13 +118,4 @@ public class OrderPage {
             return false; // Элемент не найден
         }
     }
-
-
-
-
-
-
-
-
-
 }

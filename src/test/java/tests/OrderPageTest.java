@@ -3,45 +3,73 @@ package tests;
 import data.OrderData;
 import flows.OrderFlow;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import java.util.Collection;
+
 import static org.junit.Assert.assertTrue;
 
+@RunWith(Parameterized.class)
 public class OrderPageTest extends TestsSetUp {
+
+    private final String name;
+    private final String surname;
+    private final String address;
+    private final String phone;
+    private final String station;
 
     private OrderFlow orderFlow;
 
-    @Test//Задание 2. Часть первая ... Нажать кнопку «Заказать». На странице две кнопки заказа.
+    // Конструктор для параметров
+    public OrderPageTest(String name, String surname, String address, String phone, String station) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.phone = phone;
+        this.station = station;
+    }
+
+    // Динамическое управление выбором массива параметров
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1}")
+    public static Collection<Object[]> testData() {
+        // Берём все массивы из OrderData.TEST_DATA
+        return Arrays.asList(OrderData.TEST_DATA.toArray(new Object[0][]));
+    }
+
+    @Test // Проверяем нажатие кнопки
     public void testClickOrderButton() {
-        // Тест проверки кнопок "Заказать"
         orderFlow = new OrderFlow(driver);
+
+        // Используем статический параметр для кнопки
         orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
         System.out.println("Тест кнопки 'Заказать' завершён.");
     }
 
-    @Test//Задание 2. Часть вторая ... Заполнить форму заказа.
-    public void testFillOrderForm(){
-        // Тест заполнения формы заказа
+    @Test // Заполняем форму заказа
+    public void testFillOrderForm() {
         orderFlow = new OrderFlow(driver);
 
-        // Нажимаем на кнопку заказать..
+        // Используем статический параметр для кнопки
         orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
 
-        // Заполняем форму заказа
-        orderFlow.fillOrderForm();
+        // Заполняем форму с использованием параметров из массива
+        orderFlow.fillOrderForm(name, surname, address, phone, station, OrderData.CALENDAR_DATE);
         System.out.println("Тест заполнения формы заказа завершён.");
     }
 
-    @Test//Задание 2. Часть третяя ... Проверить, что появилось всплывающее окно с сообщением об успешном создании заказа.
+    @Test // Проверяем всплывающее окно
     public void testOrderConfirmation() {
-        // Тест проверки полного флоу с подтверждением
         orderFlow = new OrderFlow(driver);
 
-        // Нажимаем на кнопку "Заказать"
+        // Используем статический параметр для кнопки
         orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
 
-        // Заполняем форму заказа
-        orderFlow.fillOrderForm();
+        // Заполняем форму с использованием параметров из массива
+        orderFlow.fillOrderForm(name, surname, address, phone, station, OrderData.CALENDAR_DATE);
 
-        // Проверяем всплывающее окно
+        // Проверяем видимость всплывающего окна
         boolean isVisible = orderFlow.isOrderConfirmationVisible();
         assertTrue("Всплывающее окно не появилось!", isVisible);
         System.out.println("Тест всплывающего окна завершён.");

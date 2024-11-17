@@ -1,4 +1,3 @@
-// MainPage.java в пакете pages
 package pages;
 
 import org.openqa.selenium.By;

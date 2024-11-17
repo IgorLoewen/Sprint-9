@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import org.openqa.selenium.TimeoutException;
 
-
 public class OrderFlow {
     private WebDriver driver;
     private MainPage mainPage;
@@ -47,17 +46,16 @@ public class OrderFlow {
         }
     }
 
-
     // Шаг 2: Заполнить форму заказа
-    public void fillOrderForm() {
-        orderPage.enterName(OrderData.NAME);
-        orderPage.enterSurname(OrderData.SURNAME);
-        orderPage.enterAddress(OrderData.ADDRESS);
-        orderPage.enterPhone(OrderData.PHONE);
-        orderPage.selectStation(OrderData.STATION);
+    public void fillOrderForm(String name, String surname, String address, String phone, String station, String calendarDate) {
+        orderPage.enterName(name);
+        orderPage.enterSurname(surname);
+        orderPage.enterAddress(address);
+        orderPage.enterPhone(phone);
+        orderPage.selectStation(station);
         orderPage.clickNextButton();
-        orderPage.enterCalendarDate(OrderData.CALENDAR_DATE);
-        orderPage.selectRentalTermThreeDays();
+        orderPage.enterCalendarDate(calendarDate);
+        orderPage.selectRentalTermThreeDays(); // Срок аренды остаётся статическим
         orderPage.clickPlaceOrderButton();
         orderPage.clickConfirmOrderButton();
         System.out.println("Форма заказа полностью заполнена.");
