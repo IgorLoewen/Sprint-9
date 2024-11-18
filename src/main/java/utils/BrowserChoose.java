@@ -17,6 +17,7 @@ public class BrowserChoose {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-features=FederatedCredentialManagement");
             options.addArguments("--remote-allow-origins=*");
+            options.addArguments("--disable-gpu");
             return new ChromeDriver(options);
         }
     }

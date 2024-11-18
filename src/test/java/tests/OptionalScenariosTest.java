@@ -7,11 +7,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.OptionalScenariosPage;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.OrderPage;
-
 import java.time.Duration;
 
 public class OptionalScenariosTest extends TestsSetUp {
@@ -20,7 +19,7 @@ public class OptionalScenariosTest extends TestsSetUp {
     private OrderPage orderPage;
     private OptionalScenariosPage optionalScenariosPage;
 
-  /*  @Test // Проверяем переход на главную страницу по клику на логотип "Самокат"
+    @Test // Проверяем переход на главную страницу по клику на логотип "Самокат"
     public void testClickOrderButton() {
         orderFlow = new OrderFlow(driver);
         mainPage = new MainPage(driver);
@@ -61,7 +60,7 @@ public class OptionalScenariosTest extends TestsSetUp {
             e.printStackTrace();
         }
         System.out.println("Дополнительный тест нажатия на логотип 'Яндекс' сработал и мы перешли на страницу Яндекс :) УРА, мне это нравится)))");
-    } */
+    }
 
 
     @Test // Проверяем текст ошибок под полями
@@ -89,6 +88,32 @@ public class OptionalScenariosTest extends TestsSetUp {
 
         System.out.println("Тест на проверку текстов ошибок выполнен зачётнО :) !");
     }
+
+   @Test // Проверяем клик по кнопке "Статус заказа" и ввод текста
+   public void testClickStatusOrderButton() {
+       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+       // Шаг 1: Нажимаем на кнопку "Статус заказа"
+       WebElement statusOrderButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div/div/div/div[1]/div[2]/button[2]")));
+       statusOrderButton.click();
+
+       // Шаг 2: Вводим текст "ывапывапвпа"
+       WebElement inputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div/div[1]/div[3]/div/input")));
+       inputField.sendKeys("ывапывапвпа");
+
+       // Шаг 3: Нажимаем на кнопку "Go!"
+       WebElement goButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div/div/div/div[1]/div[3]/button")));
+       goButton.click();
+
+       // Ждем 5 секунд для проверки визуального отображения
+       try {
+           Thread.sleep(5000);
+       } catch (InterruptedException e) {
+           e.printStackTrace();
+       }
+
+       System.out.println("УРА!!! Я это сделал!!! Проверка происходит по факту загрузки!!! Там нет локатора даже на картинку!!!");
+   }
 
 
 }

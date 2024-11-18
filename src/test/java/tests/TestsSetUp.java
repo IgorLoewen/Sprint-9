@@ -14,7 +14,7 @@ public class TestsSetUp {
     @Before
     public void setUp() {
         // Получаем параметр браузера из системных переменных
-        String browser = System.getProperty("browser", "firefox");
+        String browser = System.getProperty("browser", "chromegi");
         // Команда для запуска с Firefox: "mvn test -Dbrowser=firefox"
         // Или можно указать браузер напрямую, если не передавать параметр
 
