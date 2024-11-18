@@ -1,4 +1,3 @@
-// TestsSetUp.java в пакете tests
 package tests;
 
 import org.junit.After;
@@ -6,7 +5,6 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.BrowserChoose;
-
 import java.time.Duration;
 
 public class TestsSetUp {
@@ -16,7 +14,7 @@ public class TestsSetUp {
     @Before
     public void setUp() {
         // Получаем параметр браузера из системных переменных
-        String browser = System.getProperty("browser", "firefox");
+        String browser = System.getProperty("browser", "chrome");
         // Команда для запуска с Firefox: "mvn test -Dbrowser=firefox"
         // Или можно указать браузер напрямую, если не передавать параметр
 
