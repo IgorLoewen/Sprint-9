@@ -1,4 +1,3 @@
-// TestsSetUp.java в пакете tests
 package tests;
 
 import org.junit.After;
@@ -6,7 +5,6 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.BrowserChoose;
-
 import java.time.Duration;
 
 public class TestsSetUp {
