@@ -1,8 +1,8 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,13 +16,21 @@ public class MainPage {
         this.driver = driver;
     }
 
-    // Локаторы для кнопок "Заказать"
+    // Ожидаемые тексты ответов на вопросы
+    public static final String[] EXPECTED_TEXTS = {
+            "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
+            "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.",
+            "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.",
+            "Только начиная с завтрашнего дня. Но скоро станем расторопнее.",
+            "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.",
+            "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.",
+            "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
+            "Да, обязательно. Всем самокатов! И Москве, и Московской области."
+    };
+
+    // Локаторы для верхней и нижней кнопок ЗАКАЗАТЬ
     private By upperOrderButton = By.xpath("(//button[contains(@class, 'Button_Button__ra12g')])[1]");
-    // Верхняя кнопка "Заказать" - Локатор: XPath первого элемента с классом "Button_Button__ra12g"
-
     private By lowerOrderButton = By.xpath("//*[@id='root']/div/div/div[4]/div[2]/div[5]/button");
-    // Нижняя кнопка "Заказать" - Локатор: XPath элемента с точным адресом
-
 
     // Метод для прокрутки к элементу
     public void scrollToElement(By locator) {
@@ -32,42 +40,32 @@ public class MainPage {
 
     // Универсальный метод для клика по кнопке
     public void clickButton(By locator) {
-        // Прокрутка к элементу перед кликом
         scrollToElement(locator);
-
-        // Ожидание кликабельности кнопки
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
-
-        // Клик по кнопке
         driver.findElement(locator).click();
     }
 
-    // Метод для клика по кнопкам вопросов в цикле
+    // Методы для клика по кнопкам "Заказать"
+    public void clickUpperOrderButton() {
+        clickButton(upperOrderButton);
+    }
+
+    public void clickLowerOrderButton() {
+        clickButton(lowerOrderButton);
+    }
+
+    // Метод для клика по кнопке вопроса
     public void clickQuestionButton(int buttonNumber) {
         By questionButton = By.id("accordion__heading-" + buttonNumber);
         clickButton(questionButton);
     }
 
-    // Метод для клика по верхней кнопке "Заказать"
-    public void clickUpperOrderButton() {
-        clickButton(upperOrderButton);
-    }
-
-    // Метод для клика по нижней кнопке "Заказать"
-    public void clickLowerOrderButton() {
-        clickButton(lowerOrderButton);
-    }
-
     // Метод для получения текста ответа на вопрос
     public String getAnswerText(int questionNumber) {
         By answerLocator = By.id("accordion__panel-" + questionNumber);
-
-        // Ожидание видимости текста
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(answerLocator));
-
-        // Возвращаем текст ответа
         return driver.findElement(answerLocator).getText();
     }
 }

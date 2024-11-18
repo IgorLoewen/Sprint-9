@@ -44,7 +44,7 @@ public class OrderPageTest extends TestsSetUp {
 
         // Используем статический параметр для кнопки
         orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
-        System.out.println("Тест кнопки 'Заказать' завершён.");
+        System.out.println("Тест номер 2 для кнопки 'Заказать' сработал :)");
     }
 
     @Test // Заполняем форму заказа
@@ -56,7 +56,7 @@ public class OrderPageTest extends TestsSetUp {
 
         // Заполняем форму с использованием параметров из массива
         orderFlow.fillOrderForm(name, surname, address, phone, station, OrderData.CALENDAR_DATE);
-        System.out.println("Тест заполнения формы заказа завершён.");
+        System.out.println("Тест формы заказа номер 3 сработал тоже успешно :)");
     }
 
     @Test // Проверяем всплывающее окно
@@ -72,6 +72,6 @@ public class OrderPageTest extends TestsSetUp {
         // Проверяем видимость всплывающего окна
         boolean isVisible = orderFlow.isOrderConfirmationVisible();
         assertTrue("Всплывающее окно не появилось!", isVisible);
-        System.out.println("Тест всплывающего окна завершён.");
+        System.out.println("Тест о завершении удачного заказа номер 4 сработал тоже на Ура :)");
     }
 }

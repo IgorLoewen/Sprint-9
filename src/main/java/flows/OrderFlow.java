@@ -1,13 +1,11 @@
 package flows;
 
-import data.OrderData;
 import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 import pages.OrderPage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-import org.openqa.selenium.TimeoutException;
 
 public class OrderFlow {
     private WebDriver driver;
@@ -37,14 +35,11 @@ public class OrderFlow {
         }
 
         // Проверяем, что текущий URL соответствует ожидаемому
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Ожидание до 10 секунд
-        try {
-            wait.until(ExpectedConditions.urlToBe(expectedUrl));
-            System.out.println("Успешный переход на URL: " + expectedUrl);
-        } catch (TimeoutException e) {
-            throw new AssertionError("Переход на URL '" + expectedUrl + "' не выполнен. Текущий URL: " + driver.getCurrentUrl());
-        }
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.urlToBe(expectedUrl));
     }
+
+
 
     // Шаг 2: Заполнить форму заказа
     public void fillOrderForm(String name, String surname, String address, String phone, String station, String calendarDate) {
@@ -58,7 +53,6 @@ public class OrderFlow {
         orderPage.selectRentalTermThreeDays(); // Срок аренды остаётся статическим
         orderPage.clickPlaceOrderButton();
         orderPage.clickConfirmOrderButton();
-        System.out.println("Форма заказа полностью заполнена.");
     }
 
     // Шаг 3: Проверить всплывающее окно
