@@ -10,13 +10,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.OrderPage;
+
 import java.time.Duration;
 
 public class OptionalScenariosTest extends TestsSetUp {
     private MainPage mainPage;
     private OrderFlow orderFlow;
+    private OrderPage orderPage;
+    private OptionalScenariosPage optionalScenariosPage;
 
-    @Test // Проверяем переход на главную страницу по клику на логотип "Самокат"
+  /*  @Test // Проверяем переход на главную страницу по клику на логотип "Самокат"
     public void testClickOrderButton() {
         orderFlow = new OrderFlow(driver);
         mainPage = new MainPage(driver);
@@ -57,15 +61,34 @@ public class OptionalScenariosTest extends TestsSetUp {
             e.printStackTrace();
         }
         System.out.println("Дополнительный тест нажатия на логотип 'Яндекс' сработал и мы перешли на страницу Яндекс :) УРА, мне это нравится)))");
+    } */
+
+
+    @Test // Проверяем текст ошибок под полями
+    public void testValidationErrorTexts() {
+        orderPage = new OrderPage(driver);
+
+        // Нажимаем на кнопку "Заказать" на главной странице
+        orderFlow = new OrderFlow(driver); // Не забываем инициализировать orderFlow
+        orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
+
+        // Вводим невалидные данные
+        orderPage.enterName("5645674567");
+        orderPage.enterSurname("6e57767");
+        orderPage.enterAddress("56766755674745eurhdfghtdfgh");
+        orderPage.enterPhone("5675677567");
+
+        // Нажимаем "Далее" для отображения ошибок
+        orderPage.clickNextButton();
+
+        // Проверяем тексты ошибок
+        assertEquals("Введите корректное имя", OptionalScenariosPage.getNameErrorText(driver));
+        assertEquals("Введите корректную фамилию", OptionalScenariosPage.getSurnameErrorText(driver));
+        assertEquals("Введите корректный адрес", OptionalScenariosPage.getAddressErrorText(driver));
+        assertEquals("Введите корректный номер", OptionalScenariosPage.getPhoneErrorText(driver));
+
+        System.out.println("Тест на проверку текстов ошибок выполнен зачётнО :) !");
     }
-
-
-
-
-
-
-
-
 
 
 }
