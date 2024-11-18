@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 public class BrowserChoose {
 
     public static WebDriver createDriver(String browser) {
-        if (browser.equalsIgnoreCase("firefox")) {
+        if (browser.equalsIgnoreCase("chrome")) {
             FirefoxOptions options = new FirefoxOptions();
             return new FirefoxDriver(options);
         } else {
