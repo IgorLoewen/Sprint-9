@@ -7,6 +7,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
@@ -42,8 +45,13 @@ public class OrderPageTest extends TestsSetUp {
 
         // Используем статический параметр для кнопки
         orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
-        System.out.println("Тест номер 2 для кнопки 'Заказать' сработал :)");
+
+        String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        boolean urlIsCorrect = wait.until(ExpectedConditions.urlToBe(expectedUrl));
+        assertTrue("URL не соответствует ожидаемому после нажатия на кнопку", urlIsCorrect);
     }
+
 
     @Test // Заполняем форму заказа
     public void testFillOrderForm() {
@@ -54,22 +62,9 @@ public class OrderPageTest extends TestsSetUp {
 
         // Заполняем форму с использованием параметров из массива
         orderFlow.fillOrderForm(name, surname, address, phone, station, OrderData.CALENDAR_DATE);
-        System.out.println("Тест формы заказа номер 3 сработал тоже успешно :)");
-    }
-
-    @Test // Проверяем всплывающее окно
-    public void testOrderConfirmation() {
-        orderFlow = new OrderFlow(driver);
-
-        // Используем статический параметр для кнопки
-        orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
-
-        // Заполняем форму с использованием параметров из массива
-        orderFlow.fillOrderForm(name, surname, address, phone, station, OrderData.CALENDAR_DATE);
-
-        // Проверяем видимость всплывающего окна
         boolean isVisible = orderFlow.isOrderConfirmationVisible();
         assertTrue("Всплывающее окно не появилось!", isVisible);
-        System.out.println("Тест о завершении удачного заказа номер 4 сработал тоже на Ура :)");
     }
+
+
 }
