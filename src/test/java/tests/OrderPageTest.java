@@ -20,32 +20,30 @@ public class OrderPageTest extends TestsSetUp {
     private final String address;
     private final String phone;
     private final String station;
+    private final String calendarDate;
+    private final String buttonType;
 
     private OrderFlow orderFlow;
 
-    // Конструктор для параметров
-    public OrderPageTest(String name, String surname, String address, String phone, String station) {
+    public OrderPageTest(String name, String surname, String address, String phone, String station, String calendarDate, String buttonType) {
         this.name = name;
         this.surname = surname;
         this.address = address;
         this.phone = phone;
         this.station = station;
+        this.calendarDate = calendarDate;
+        this.buttonType = buttonType;
     }
 
-    // Динамическое управление выбором массива параметров
     @Parameterized.Parameters(name = "Тестовые данные: {0} {1}")
     public static Collection<Object[]> testData() {
-        // Берём все массивы из OrderData.TEST_DATA
         return Arrays.asList(OrderData.TEST_DATA.toArray(new Object[0][]));
     }
 
     @Test // Проверяем нажатие кнопки
     public void testClickOrderButton() {
         orderFlow = new OrderFlow(driver);
-
-        // Используем статический параметр для кнопки
-        orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
-
+        orderFlow.clickOrderButton(buttonType);
         String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         boolean urlIsCorrect = wait.until(ExpectedConditions.urlToBe(expectedUrl));
@@ -56,12 +54,8 @@ public class OrderPageTest extends TestsSetUp {
     @Test // Заполняем форму заказа
     public void testFillOrderForm() {
         orderFlow = new OrderFlow(driver);
-
-        // Используем статический параметр для кнопки
-        orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
-
-        // Заполняем форму с использованием параметров из массива
-        orderFlow.fillOrderForm(name, surname, address, phone, station, OrderData.CALENDAR_DATE);
+        orderFlow.clickOrderButton(buttonType);
+        orderFlow.fillOrderForm(name, surname, address, phone, station, calendarDate);
         boolean isVisible = orderFlow.isOrderConfirmationVisible();
         assertTrue("Всплывающее окно не появилось!", isVisible);
     }

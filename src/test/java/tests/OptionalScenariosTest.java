@@ -1,8 +1,11 @@
 package tests;
 
+
 import data.OrderData;
 import flows.OrderFlow;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.OptionalScenariosPage;
@@ -12,12 +15,41 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.OrderPage;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.Collection;
 
+@RunWith(Parameterized.class)
 public class OptionalScenariosTest extends TestsSetUp {
     private MainPage mainPage;
     private OrderFlow orderFlow;
     private OrderPage orderPage;
     private OptionalScenariosPage optionalScenariosPage;
+
+    private final String name;
+    private final String surname;
+    private final String address;
+    private final String phone;
+    private final String station;
+    private final String calendarDate;
+    private final String buttonType;
+
+    // Конструктор для параметров
+    public OptionalScenariosTest(String name, String surname, String address, String phone, String station, String calendarDate, String buttonType) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.phone = phone;
+        this.station = station;
+        this.calendarDate = calendarDate;
+        this.buttonType = buttonType;
+    }
+
+    // Динамическое управление выбором массива параметров
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1}")
+    public static Collection<Object[]> testData() {
+        // Берём все массивы из OrderData.TEST_DATA
+        return Arrays.asList(OrderData.TEST_DATA.toArray(new Object[0][]));
+    }
 
     @Test // Проверяем переход на главную страницу по клику на логотип "Самокат"
     public void testClickOrderButton() {
@@ -25,7 +57,7 @@ public class OptionalScenariosTest extends TestsSetUp {
         mainPage = new MainPage(driver);
 
         // Нажимаем на кнопку "Заказать" на главной странице
-        orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
+        orderFlow.clickOrderButton(buttonType);
 
         // Нажимаем на логотип "Самокат"
         mainPage.clickButton(OptionalScenariosPage.scooterLogo);
@@ -48,7 +80,7 @@ public class OptionalScenariosTest extends TestsSetUp {
         mainPage = new MainPage(driver);
 
         // Нажимаем на кнопку "Заказать" на главной странице
-        orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
+        orderFlow.clickOrderButton(buttonType);
 
         // Нажимаем на логотип "Яндекс"
         mainPage.clickButton(OptionalScenariosPage.yandexLogo);
@@ -69,7 +101,7 @@ public class OptionalScenariosTest extends TestsSetUp {
 
         // Нажимаем на кнопку "Заказать" на главной странице
         orderFlow = new OrderFlow(driver); // Не забываем инициализировать orderFlow
-        orderFlow.clickOrderButton(OrderData.ORDER_BUTTON);
+        orderFlow.clickOrderButton(buttonType);
 
         // Вводим невалидные данные
         orderPage.enterName("5645674567");
@@ -117,3 +149,4 @@ public class OptionalScenariosTest extends TestsSetUp {
 
 
 }
+
