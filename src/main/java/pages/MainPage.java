@@ -32,6 +32,16 @@ public class MainPage {
     private By upperOrderButton = By.xpath("(//button[contains(@class, 'Button_Button__ra12g')])[1]");
     private By lowerOrderButton = By.xpath("//*[@id='root']/div/div/div[4]/div[2]/div[5]/button");
 
+    // Локатор для кнопки вопроса по индексу
+    private By questionButton(int questionIndex) {
+        return By.id("accordion__heading-" + questionIndex);
+    }
+
+    // Локатор для текстов ответов FAQ
+    private By answerLocator(int questionIndex) {
+        return By.id("accordion__panel-" + questionIndex);
+    }
+
     // Метод для прокрутки к элементу
     public void scrollToElement(By locator) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -56,16 +66,14 @@ public class MainPage {
     }
 
     // Метод для клика по кнопке вопроса
-    public void clickQuestionButton(int buttonNumber) {
-        By questionButton = By.id("accordion__heading-" + buttonNumber);
-        clickButton(questionButton);
+    public void clickQuestionButton(int questionNumber) {
+        clickButton(questionButton(questionNumber));
     }
 
     // Метод для получения текста ответа на вопрос
     public String getAnswerText(int questionNumber) {
-        By answerLocator = By.id("accordion__panel-" + questionNumber);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(answerLocator));
-        return driver.findElement(answerLocator).getText();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(answerLocator(questionNumber)));
+        return driver.findElement(answerLocator(questionNumber)).getText();
     }
 }
