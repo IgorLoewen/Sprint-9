@@ -21,28 +21,22 @@ public class OrderFlow {
 
     // Шаг 1: Нажать на кнопку "Заказать" и проверить URL
     public void clickOrderButton(String buttonType) {
-        String expectedUrl = "https://qa-scooter.praktikum-services.ru/order"; // Ожидаемый URL
-
-        // Нажимаем на кнопку в зависимости от типа
-        if (buttonType.equals("UPPER")) {
-            mainPage.clickUpperOrderButton(); // Нажимаем верхнюю кнопку
-            System.out.println("Нажата верхняя кнопка 'Заказать'.");
-        } else if (buttonType.equals("LOWER")) {
-            mainPage.clickLowerOrderButton(); // Нажимаем нижнюю кнопку
-            System.out.println("Нажата нижняя кнопка 'Заказать'.");
-        } else {
-            throw new IllegalArgumentException("Некорректный параметр кнопки: " + buttonType);
-        }
-
-        // Проверяем, что текущий URL соответствует ожидаемому
+        String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
+        switch (buttonType) {
+            case "UPPER":
+                mainPage.clickUpperOrderButton();
+                break;
+            case "LOWER":
+                mainPage.clickLowerOrderButton();
+                break;
+            default:
+                throw new IllegalArgumentException("Некорректный параметр кнопки: " + buttonType);}
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.urlToBe(expectedUrl));
     }
 
-
-
     // Шаг 2: Заполнить форму заказа
-    public void fillOrderForm(String name, String surname, String address, String phone, String station, String calendarDate) {
+    public boolean fillOrderForm(String name, String surname, String address, String phone, String station, String calendarDate) {
         orderPage.enterName(name);
         orderPage.enterSurname(surname);
         orderPage.enterAddress(address);
@@ -50,13 +44,9 @@ public class OrderFlow {
         orderPage.selectStation(station);
         orderPage.clickNextButton();
         orderPage.enterCalendarDate(calendarDate);
-        orderPage.selectRentalTermThreeDays(); // Срок аренды остаётся статическим
+        orderPage.selectRentalTermThreeDays();
         orderPage.clickPlaceOrderButton();
         orderPage.clickConfirmOrderButton();
-    }
-
-    // Шаг 3: Проверить всплывающее окно
-    public boolean isOrderConfirmationVisible() {
         return orderPage.isOrderConfirmationHeaderVisible();
     }
 }

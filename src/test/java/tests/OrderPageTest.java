@@ -50,15 +50,11 @@ public class OrderPageTest extends TestsSetUp {
         assertTrue("URL не соответствует ожидаемому после нажатия на кнопку", urlIsCorrect);
     }
 
-
-    @Test // Заполняем форму заказа
+    @Test // Проверяем флоу заказа
     public void testFillOrderForm() {
         orderFlow = new OrderFlow(driver);
         orderFlow.clickOrderButton(buttonType);
-        orderFlow.fillOrderForm(name, surname, address, phone, station, calendarDate);
-        boolean isVisible = orderFlow.isOrderConfirmationVisible();
-        assertTrue("Всплывающее окно не появилось!", isVisible);
+        boolean isOrderCompleted = orderFlow.fillOrderForm(name, surname, address, phone, station, calendarDate);
+        assertTrue("Заказ не завершился успешно!", isOrderCompleted);
     }
-
-
 }
