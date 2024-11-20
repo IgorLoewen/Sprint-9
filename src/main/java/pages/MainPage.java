@@ -11,6 +11,10 @@ import java.time.Duration;
 public class MainPage {
     private WebDriver driver;
 
+    // Статическая переменная для базового URL
+    public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";
+
+
     // Конструктор
     public MainPage(WebDriver driver) {
         this.driver = driver;

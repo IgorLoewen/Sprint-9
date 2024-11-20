@@ -8,6 +8,9 @@ import java.time.Duration;
 public class OrderPage {
     private WebDriver driver;
 
+    // Статическая переменная для базового URL
+    public static final String Order_URL = "https://qa-scooter.praktikum-services.ru/order";
+
     // Конструктор для инициализации драйвера
     public OrderPage(WebDriver driver) {
         this.driver = driver;

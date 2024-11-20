@@ -21,7 +21,7 @@ public class OrderFlow {
 
     // Шаг 1: Нажать на кнопку "Заказать" и проверить URL
     public void clickOrderButton(String buttonType) {
-        String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
+        String expectedUrl = OrderPage.Order_URL;
         switch (buttonType) {
             case "UPPER":
                 mainPage.clickUpperOrderButton();

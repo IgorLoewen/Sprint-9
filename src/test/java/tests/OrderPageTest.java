@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.OrderPage;
+
 import java.time.Duration;
 import static org.junit.Assert.assertTrue;
 
@@ -44,7 +46,7 @@ public class OrderPageTest extends TestsSetUp {
     public void testClickOrderButton() {
         orderFlow = new OrderFlow(driver);
         orderFlow.clickOrderButton(buttonType);
-        String expectedUrl = "https://qa-scooter.praktikum-services.ru/order";
+        String expectedUrl = OrderPage.Order_URL;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         boolean urlIsCorrect = wait.until(ExpectedConditions.urlToBe(expectedUrl));
         assertTrue("URL не соответствует ожидаемому после нажатия на кнопку", urlIsCorrect);

@@ -1,3 +1,5 @@
+/*   Сделаю всё заново!!!
+
 package tests;
 
 
@@ -63,7 +65,7 @@ public class OptionalScenariosTest extends TestsSetUp {
         mainPage.clickButton(OptionalScenariosPage.scooterLogo);
 
         // Проверяем, что URL соответствует ожидаемому
-        String expectedUrl = "https://qa-scooter.praktikum-services.ru/";
+        String expectedUrl = MainPage.BASE_URL;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe(expectedUrl));
 
@@ -150,3 +152,4 @@ public class OptionalScenariosTest extends TestsSetUp {
 
 }
 
+*/

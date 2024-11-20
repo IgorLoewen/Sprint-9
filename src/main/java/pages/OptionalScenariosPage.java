@@ -1,3 +1,7 @@
+/*   Сделаю всё заново!!!
+
+
+
 package pages;
 
 import org.openqa.selenium.By;
@@ -42,3 +46,4 @@ private WebDriver driver;
 
 }
 
+*/
