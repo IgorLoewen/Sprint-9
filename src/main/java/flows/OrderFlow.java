@@ -30,7 +30,8 @@ public class OrderFlow {
                 mainPage.clickLowerOrderButton();
                 break;
             default:
-                throw new IllegalArgumentException("Некорректный параметр кнопки: " + buttonType);}
+                throw new IllegalArgumentException("Некорректный параметр кнопки: " + buttonType);
+        }
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.urlToBe(expectedUrl));
     }
@@ -49,4 +50,17 @@ public class OrderFlow {
         orderPage.clickConfirmOrderButton();
         return orderPage.isOrderConfirmationHeaderVisible();
     }
+
+    // Заполнение формы невалидными данными
+    public boolean fillOrderFormWithInvalidData() {
+        orderPage.enterName("5645674567");
+        orderPage.enterSurname("6e57767");
+        orderPage.enterAddress("56766755674745eurhdfghtdfgh");
+        orderPage.enterPhone("5675677567");
+        orderPage.clickNextButton();
+        return orderPage.areAllErrorsVisible();
+    }
+
+
+
 }

@@ -109,4 +109,27 @@ public class OrderPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(orderConfirmationHeader)).isDisplayed();
     }
 
+    // Локаторы для текстов ошибок
+    private static final By NAME_ERROR = By.xpath("//div[@class='Input_ErrorMessage__3HvIb Input_Visible___syz6' and text()='Введите корректное имя']");
+    private static final By SURNAME_ERROR = By.xpath("//div[@class='Input_ErrorMessage__3HvIb Input_Visible___syz6' and text()='Введите корректную фамилию']");
+    private static final By ADDRESS_ERROR = By.xpath("//div[@class='Input_ErrorMessage__3HvIb Input_Visible___syz6' and text()='Введите корректный адрес']");
+    private static final By PHONE_ERROR = By.xpath("//div[@class='Input_ErrorMessage__3HvIb Input_Visible___syz6' and text()='Введите корректный номер']");
+
+    // Метод для проверки видимости ошибок
+    public boolean isErrorVisible(By locator) {
+        try {
+            return driver.findElement(locator).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    // Метод для проверки ошибок всех полей
+    public boolean areAllErrorsVisible() {
+        return isErrorVisible(NAME_ERROR) &&
+                isErrorVisible(SURNAME_ERROR) &&
+                isErrorVisible(ADDRESS_ERROR) &&
+                isErrorVisible(PHONE_ERROR);
+    }
+
 }
