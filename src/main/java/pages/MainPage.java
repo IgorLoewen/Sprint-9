@@ -23,7 +23,9 @@ public class MainPage {
     // ========================= Локаторы =========================
     // Кнопки "Заказать"
     private static final By upperOrderButton = By.xpath("(//button[contains(@class, 'Button_Button__ra12g')])[1]");
-    private static final By lowerOrderButton = By.xpath("//*[@id='root']/div/div/div[4]/div[2]/div[5]/button");
+    private static final By lowerOrderButton = By.cssSelector("button.Button_Button__ra12g.Button_Middle__1CSJM");
+
+
 
     // Локаторы FAQ
     private static By questionButton(int questionIndex) {
@@ -41,8 +43,8 @@ public class MainPage {
     // Локаторы статуса заказа
     public static final By STATUS_ORDER_BUTTON = By.xpath("//button[text()='Статус заказа']");
     public static final By ORDER_NUMBER_INPUT = By.xpath("//input[@placeholder='Введите номер заказа']");
-    public static final By GO_BUTTON = By.xpath("/html/body/div/div/div/div[1]/div[3]/button");
-    public static final By ORDER_NOT_FOUND_MESSAGE = By.cssSelector("#root > div > div.Track_Content__St6Kn > div.Track_NotFound__6oaoY");
+    public static final By GO_BUTTON = By.xpath("//button[text()='Go!']");
+    public static final By ORDER_NOT_FOUND_MESSAGE = By.xpath("//div[contains(@class, 'Track_Content__St6Kn')]//div[contains(@class, 'Track_NotFound__6oaoY')]");
 
     // ========================= Методы =========================
 

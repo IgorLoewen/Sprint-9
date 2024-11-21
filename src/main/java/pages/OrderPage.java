@@ -27,8 +27,8 @@ public class OrderPage {
     private static final By stationField = By.cssSelector("input[placeholder='* Станция метро']");
 
     // Кнопки
-    private static final By nextButton = By.xpath("//*[@id='root']/div/div[2]/div[3]/button");
-    private static final By placeOrderButton = By.xpath("/html/body/div/div/div[2]/div[3]/button[2]");
+    private static final By nextButton = By.cssSelector("button.Button_Button__ra12g.Button_Middle__1CSJM");
+    private static final By placeOrderButton = By.xpath("//div[contains(@class, 'Order_Buttons__1xGrp')]//button[text()='Заказать']");
     private static final By confirmOrderButton = By.xpath("//button[text()='Да']");
 
     // Поле для ввода даты аренды
@@ -41,11 +41,17 @@ public class OrderPage {
     // Заголовок окна подтверждения заказа
     private static final By orderConfirmationHeader = By.xpath("//div[contains(@class, 'Order_ModalHeader') and text()='Заказ оформлен']");
 
-    // Локаторы для текстов ошибок
-    private static final By NAME_ERROR = By.xpath("//div[@class='Input_ErrorMessage__3HvIb Input_Visible___syz6' and text()='Введите корректное имя']");
-    private static final By SURNAME_ERROR = By.xpath("//div[@class='Input_ErrorMessage__3HvIb Input_Visible___syz6' and text()='Введите корректную фамилию']");
-    private static final By ADDRESS_ERROR = By.xpath("//div[@class='Input_ErrorMessage__3HvIb Input_Visible___syz6' and text()='Введите корректный адрес']");
-    private static final By PHONE_ERROR = By.xpath("//div[@class='Input_ErrorMessage__3HvIb Input_Visible___syz6' and text()='Введите корректный номер']");
+    // Локатор для текста ошибки имени
+    private static final By NAME_ERROR = By.xpath("//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')][preceding-sibling::input[@placeholder='* Имя']]");
+
+    // Локатор для текста ошибки фамилии
+    private static final By SURNAME_ERROR = By.xpath("//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')][preceding-sibling::input[@placeholder='* Фамилия']]");
+
+    // Локатор для текста ошибки адреса
+    private static final By ADDRESS_ERROR = By.xpath("//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')][preceding-sibling::input[contains(@placeholder, 'Адрес')]]");
+
+    // Локатор для текста ошибки телефона
+    private static final By PHONE_ERROR = By.xpath("//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')][preceding-sibling::input[contains(@placeholder, 'Телефон')]]");
 
     // ========================= Методы =========================
 
