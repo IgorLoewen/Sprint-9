@@ -14,23 +14,10 @@ public class MainPage {
     // Статическая переменная для базового URL
     public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";
 
-
     // Конструктор
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
-
-    // Ожидаемые тексты ответов на вопросы
-    public static final String[] EXPECTED_TEXTS = {
-            "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
-            "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.",
-            "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.",
-            "Только начиная с завтрашнего дня. Но скоро станем расторопнее.",
-            "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.",
-            "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.",
-            "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
-            "Да, обязательно. Всем самокатов! И Москве, и Московской области."
-    };
 
     // Локаторы для верхней и нижней кнопок ЗАКАЗАТЬ
     private By upperOrderButton = By.xpath("(//button[contains(@class, 'Button_Button__ra12g')])[1]");
@@ -79,5 +66,13 @@ public class MainPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(answerLocator(questionNumber)));
         return driver.findElement(answerLocator(questionNumber)).getText();
+    }
+
+    // Метод для получения текста вопроса
+    public String getQuestionText(int questionNumber) {
+        // Ожидание видимости кнопки вопроса перед получением текста
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(questionButton(questionNumber)));
+        return driver.findElement(questionButton(questionNumber)).getText();
     }
 }
