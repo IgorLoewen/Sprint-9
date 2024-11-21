@@ -41,17 +41,21 @@ public class OrderPage {
     // Заголовок окна подтверждения заказа
     private static final By orderConfirmationHeader = By.xpath("//div[contains(@class, 'Order_ModalHeader') and text()='Заказ оформлен']");
 
-    // Локатор для текста ошибки имени
+    // Локатор и геттер для текста ошибки имени
     private static final By NAME_ERROR = By.xpath("//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')][preceding-sibling::input[@placeholder='* Имя']]");
+    public static By getNameErrorLocator() {return NAME_ERROR;}
 
-    // Локатор для текста ошибки фамилии
+    // Локатор и геттер для текста ошибки фамилии
     private static final By SURNAME_ERROR = By.xpath("//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')][preceding-sibling::input[@placeholder='* Фамилия']]");
+    public static By getSurnameErrorLocator() {return SURNAME_ERROR;}
 
-    // Локатор для текста ошибки адреса
+    // Локатор и геттер для текста ошибки адреса
     private static final By ADDRESS_ERROR = By.xpath("//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')][preceding-sibling::input[contains(@placeholder, 'Адрес')]]");
+    public static By getAddressErrorLocator() {return ADDRESS_ERROR;}
 
-    // Локатор для текста ошибки телефона
+    // Локатор и геттер для текста ошибки телефона
     private static final By PHONE_ERROR = By.xpath("//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')][preceding-sibling::input[contains(@placeholder, 'Телефон')]]");
+    public static By getPhoneErrorLocator() {return PHONE_ERROR;}
 
     // ========================= Методы =========================
 
@@ -124,16 +128,12 @@ public class OrderPage {
 
     public boolean isErrorVisible(By locator) {
         try {
-            return driver.findElement(locator).isDisplayed();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }
     }
 
-    public boolean areAllErrorsVisible() {
-        return isErrorVisible(NAME_ERROR) &&
-                isErrorVisible(SURNAME_ERROR) &&
-                isErrorVisible(ADDRESS_ERROR) &&
-                isErrorVisible(PHONE_ERROR);
-    }
+
 }

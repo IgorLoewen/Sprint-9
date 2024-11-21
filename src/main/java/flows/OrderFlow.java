@@ -22,19 +22,15 @@ public class OrderFlow {
 
     //  Нажать на кнопку "Заказать" и проверить URL
     public void clickOrderButton(String buttonType) {
-        String expectedUrl = OrderPage.Order_URL;
-        switch (buttonType) {
-            case "UPPER":
-                mainPage.clickUpperOrderButton();
-                break;
-            case "LOWER":
-                mainPage.clickLowerOrderButton();
-                break;
-            default:
-                throw new IllegalArgumentException("Некорректный параметр кнопки: " + buttonType);
+        if ("UPPER".equals(buttonType)) {
+            mainPage.clickUpperOrderButton();
+        } else if ("LOWER".equals(buttonType)) {
+            mainPage.clickLowerOrderButton();
+        } else {
+            return;
         }
         new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.urlToBe(expectedUrl));
+                .until(ExpectedConditions.urlToBe(OrderPage.Order_URL));
     }
 
     //  Заполнить форму заказа
@@ -60,10 +56,45 @@ public class OrderFlow {
         orderPage.enterAddress(invalidData[2]);
         orderPage.enterPhone(invalidData[3]);
         orderPage.clickNextButton();
-        return orderPage.areAllErrorsVisible();
+
+        // Проверяем, что все ошибки видны
+        return orderPage.isErrorVisible(OrderPage.getNameErrorLocator()) &&
+                orderPage.isErrorVisible(OrderPage.getSurnameErrorLocator()) &&
+                orderPage.isErrorVisible(OrderPage.getAddressErrorLocator()) &&
+                orderPage.isErrorVisible(OrderPage.getPhoneErrorLocator());
     }
 
+    // Проверка ошибки для имени
+    public boolean isNameErrorVisible() {
+        String[] invalidData = OrderData.INVALID_DATA.get(0);
+        orderPage.enterName(invalidData[0]);
+        orderPage.clickNextButton();
+        return orderPage.isErrorVisible(OrderPage.getNameErrorLocator());
+    }
 
+    // Проверка ошибки для фамилии
+    public boolean isSurnameErrorVisible() {
+        String[] invalidData = OrderData.INVALID_DATA.get(0);
+        orderPage.enterSurname(invalidData[1]);
+        orderPage.clickNextButton();
+        return orderPage.isErrorVisible(OrderPage.getSurnameErrorLocator());
+    }
+
+    // Проверка ошибки для адреса
+    public boolean isAddressErrorVisible() {
+        String[] invalidData = OrderData.INVALID_DATA.get(0);
+        orderPage.enterAddress(invalidData[2]);
+        orderPage.clickNextButton();
+        return orderPage.isErrorVisible(OrderPage.getAddressErrorLocator());
+    }
+
+    // Проверка ошибки для телефона
+    public boolean isPhoneErrorVisible() {
+        String[] invalidData = OrderData.INVALID_DATA.get(0);
+        orderPage.enterPhone(invalidData[3]);
+        orderPage.clickNextButton();
+        return orderPage.isErrorVisible(OrderPage.getPhoneErrorLocator());
+    }
 
 
 }

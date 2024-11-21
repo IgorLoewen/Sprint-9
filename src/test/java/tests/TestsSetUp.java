@@ -14,7 +14,7 @@ public class TestsSetUp {
 
     @Before
     public void setUp() {
-        String browser = System.getProperty("browser", "firefox");
+        String browser = System.getProperty("browser", "chrome");
         driver = BrowserChoose.createDriver(browser);
         driver.get(MainPage.BASE_URL);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
