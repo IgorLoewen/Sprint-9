@@ -14,7 +14,6 @@ public class TestsSetUp {
 
     @Before
     public void setUp() {
-
         String browser = System.getProperty("browser", "firefox");
         driver = BrowserChoose.createDriver(browser);
         driver.get(MainPage.BASE_URL);

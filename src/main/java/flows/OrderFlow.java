@@ -20,7 +20,7 @@ public class OrderFlow {
         this.orderPage = new OrderPage(driver);
     }
 
-    // Шаг 1: Нажать на кнопку "Заказать" и проверить URL
+    //  Нажать на кнопку "Заказать" и проверить URL
     public void clickOrderButton(String buttonType) {
         String expectedUrl = OrderPage.Order_URL;
         switch (buttonType) {
@@ -37,7 +37,7 @@ public class OrderFlow {
                 .until(ExpectedConditions.urlToBe(expectedUrl));
     }
 
-    // Шаг 2: Заполнить форму заказа
+    //  Заполнить форму заказа
     public boolean fillOrderForm(String name, String surname, String address, String phone, String station, String calendarDate) {
         orderPage.enterName(name);
         orderPage.enterSurname(surname);

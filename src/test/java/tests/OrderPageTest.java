@@ -10,7 +10,6 @@ import java.util.Collection;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.OrderPage;
-
 import java.time.Duration;
 import static org.junit.Assert.assertTrue;
 

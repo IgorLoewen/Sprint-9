@@ -80,4 +80,46 @@ public class MainPage {
 
     // Локатор для логотипа "Яндекс"
     public static By yandexLogo = By.xpath("//img[@alt='Yandex']");
+
+    // Локатор для кнопки "Статус заказа"
+    public static final By STATUS_ORDER_BUTTON = By.xpath("//button[text()='Статус заказа']");
+
+    // Локатор для поля ввода номера заказа
+    public static final By ORDER_NUMBER_INPUT = By.xpath("//input[@placeholder='Введите номер заказа']");
+
+    // Локатор для кнопки "Go"
+    public static final By GO_BUTTON = By.xpath("/html/body/div/div/div/div[1]/div[3]/button");
+
+    // Локатор для сообщения об отсутствии заказа
+    public static final By ORDER_NOT_FOUND_MESSAGE = By.cssSelector("#root > div > div.Track_Content__St6Kn > div.Track_NotFound__6oaoY");
+
+
+    // Метод для нажатия на кнопку "Статус заказа"
+    public void clickStatusOrderButton() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(STATUS_ORDER_BUTTON))
+                .click();
+    }
+
+    // Метод для ввода номера заказа в поле
+    public void enterOrderNumber(String orderNumber) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(ORDER_NUMBER_INPUT))
+                .sendKeys(orderNumber);
+    }
+
+    // Метод для нажатия на кнопку "Go"
+    public void clickGoButton() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(GO_BUTTON))
+                .click();
+    }
+
+    // Метод для проверки отображения сообщения "Такого заказа нет"
+    public boolean isOrderNotFoundMessageVisible() {
+        return new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(ORDER_NOT_FOUND_MESSAGE))
+                .isDisplayed();
+    }
+
 }
