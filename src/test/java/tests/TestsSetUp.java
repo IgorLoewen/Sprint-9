@@ -14,16 +14,10 @@ public class TestsSetUp {
 
     @Before
     public void setUp() {
-        // Получаем параметр браузера из системных переменных
-        String browser = System.getProperty("browser", "firefox");
-        // Команда для запуска с Firefox: "mvn test -Dbrowser=firefox"
-        // Или можно указать браузер напрямую, если не передавать параметр
 
-        // Инициализация WebDriver с выбранным браузером
+        String browser = System.getProperty("browser", "firefox");
         driver = BrowserChoose.createDriver(browser);
         driver.get(MainPage.BASE_URL);
-
-        // Инициализация WebDriverWait для управления явными ожиданиями
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 

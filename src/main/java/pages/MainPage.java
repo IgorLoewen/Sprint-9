@@ -12,7 +12,7 @@ public class MainPage {
     private WebDriver driver;
 
     // Статическая переменная для базового URL
-    public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";
+    public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/";
 
     // Конструктор
     public MainPage(WebDriver driver) {
@@ -75,4 +75,7 @@ public class MainPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(questionButton(questionNumber)));
         return driver.findElement(questionButton(questionNumber)).getText();
     }
+
+    // Локатор для логотипа "Самокат"
+    public static By scooterLogo = By.xpath("//img[@alt='Scooter']");
 }
