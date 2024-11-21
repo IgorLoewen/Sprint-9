@@ -19,4 +19,23 @@ public class MainPageLogoTest extends TestsSetUp {
         assertEquals(MainPage.BASE_URL, driver.getCurrentUrl());
     }
 
+    @Test// Тестирование перехода на главную страницу Яндекса, при нажатии на логотип Яндекса
+    public void testClickLogoYandex() {
+        driver.get(OrderPage.Order_URL);
+        new MainPage(driver).clickButton(MainPage.yandexLogo);
+        String newWindow = driver.getWindowHandles().toArray()[1].toString();
+        driver.switchTo().window(newWindow);
+        new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(driver -> driver.getCurrentUrl().equals("https://dzen.ru/?yredirect=true"));
+        assertEquals("https://dzen.ru/?yredirect=true", driver.getCurrentUrl());
+    }
+
+
+
+
+
+
+
+
+
 }

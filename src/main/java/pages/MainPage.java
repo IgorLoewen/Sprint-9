@@ -70,7 +70,6 @@ public class MainPage {
 
     // Метод для получения текста вопроса
     public String getQuestionText(int questionNumber) {
-        // Ожидание видимости кнопки вопроса перед получением текста
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(questionButton(questionNumber)));
         return driver.findElement(questionButton(questionNumber)).getText();
@@ -78,4 +77,7 @@ public class MainPage {
 
     // Локатор для логотипа "Самокат"
     public static By scooterLogo = By.xpath("//img[@alt='Scooter']");
+
+    // Локатор для логотипа "Яндекс"
+    public static By yandexLogo = By.xpath("//img[@alt='Yandex']");
 }
