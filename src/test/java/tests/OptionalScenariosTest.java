@@ -1,4 +1,3 @@
-/*   Сделаю всё заново!!!
 
 package tests;
 
@@ -152,4 +151,3 @@ public class OptionalScenariosTest extends TestsSetUp {
 
 }
 
-*/
