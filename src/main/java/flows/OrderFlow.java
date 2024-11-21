@@ -1,5 +1,6 @@
 package flows;
 
+import data.OrderData;
 import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 import pages.OrderPage;
@@ -53,13 +54,15 @@ public class OrderFlow {
 
     // Заполнение формы невалидными данными
     public boolean fillOrderFormWithInvalidData() {
-        orderPage.enterName("5645674567");
-        orderPage.enterSurname("6e57767");
-        orderPage.enterAddress("56766755674745eurhdfghtdfgh");
-        orderPage.enterPhone("5675677567");
+        String[] invalidData = OrderData.INVALID_DATA.get(0);
+        orderPage.enterName(invalidData[0]);
+        orderPage.enterSurname(invalidData[1]);
+        orderPage.enterAddress(invalidData[2]);
+        orderPage.enterPhone(invalidData[3]);
         orderPage.clickNextButton();
         return orderPage.areAllErrorsVisible();
     }
+
 
 
 

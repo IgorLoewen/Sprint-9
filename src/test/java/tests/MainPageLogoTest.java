@@ -2,10 +2,8 @@ package tests;
 
 import org.junit.Test;
 import pages.OrderPage;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;

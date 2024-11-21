@@ -42,22 +42,21 @@ public class OrderPageTest extends TestsSetUp {
         return Arrays.asList(OrderData.TEST_DATA.toArray(new Object[0][]));
     }
 
-    @Test // Проверяем нажатие верхней и нижней кнопок
+    @Test // Проверяем нажатие верхней и нижней кнопок через общую параметризацию с двумя наборами данных
     public void testClickOrderButton() {
         orderFlow = new OrderFlow(driver);
         orderFlow.clickOrderButton(buttonType);
-        String expectedUrl = OrderPage.Order_URL;
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        boolean urlIsCorrect = wait.until(ExpectedConditions.urlToBe(expectedUrl));
-        assertTrue("URL не соответствует ожидаемому после нажатия на кнопку", urlIsCorrect);
+        assertTrue(new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.urlToBe(OrderPage.Order_URL)));
     }
 
-    @Test // Проверяем флоу заказа и открытие подтверждения заказа в всплывающем окне
+
+    @Test // Проверяем флоу заказа и открытие подтверждения заказа в всплывающем окне через общую параметризацию с двумя наборами данных
     public void testFillOrderForm() {
         orderFlow = new OrderFlow(driver);
         orderFlow.clickOrderButton(buttonType);
-        boolean isOrderCompleted = orderFlow.fillOrderForm(name, surname, address, phone, station, calendarDate);
-        assertTrue("Заказ не завершился успешно!", isOrderCompleted);
+        assertTrue(orderFlow.fillOrderForm(name, surname, address, phone, station, calendarDate));
     }
+
 
 }
